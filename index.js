@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors');
-const app = express();
 const fs = require('fs');//모듈 불러오기, 설치 필요없
 const bodyParser = require('body-parser')//설치 완
+const app = express();
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,8 +20,10 @@ app.get('/abc', function (req, res) {
 app.get('/abc/:id', function (req, res) {
     const jsonData = fs.readFileSync('./test.json');
     const data = JSON.parse(jsonData);
+
     const {id} = req.params;
     const aaa = data.filter(n=> n.id == id)
+
     res.send( aaa );
 })
 
@@ -33,4 +35,4 @@ app.post('/insert',function(req,res){
     res.send('성공');//send는 빠져선 안됨=>안하면 계속 로딩이됨
 })
 
-app.listen(3030)//port번호임
+app.listen(3000)//port번호임
